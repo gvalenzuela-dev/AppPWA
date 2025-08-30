@@ -1,0 +1,26 @@
+﻿@page "/posts"
+@using AppPWA.Models
+@using AppPWA.Services
+@inject PostService PostService
+
+
+<ul>
+    @foreach (var post in posts)
+    {
+        <li>
+            <h3>@post.Title</h3>
+            <p>@post.Body</p>
+        </li>
+    }
+)
+</ul>
+
+
+@code {
+    private List<Post> posts = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        posts = await PostService.GetPostsAsync();
+    }
+}
